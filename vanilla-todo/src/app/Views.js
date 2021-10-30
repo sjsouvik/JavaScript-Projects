@@ -51,7 +51,7 @@ export default class Views {
         const improvedSearch = this.debounce(this.searchTodos, 500);
         document.addEventListener('input', (e) => {
             if(e.target.classList.contains('search-todo')){
-                improvedSearch(e.target.value);                
+                improvedSearch(e.target.value, this.store.getTodos(), this.updateView);                
                 // let todos = this.store.getTodos();                
                 // todos = todos.filter(todo => todo.todoText.toLowerCase().includes(e.target.value.toLowerCase()));                
                 // this.updateView(todos);
@@ -59,12 +59,10 @@ export default class Views {
         })
     }
 
-    searchTodos(searchText){
-        console.log('search invoked')               
-        let todos = this.store.getTodos(); 
-        // console.log('search invoked')               
+    searchTodos(searchText, todos, updateView){                      
+        // let todos = this.store.getTodos();                      
         todos = todos.filter(todo => todo.todoText.toLowerCase().includes(searchText.toLowerCase()));                
-        this.updateView(todos);
+        updateView(todos);
     }
 
     debounce(fn, delay){
