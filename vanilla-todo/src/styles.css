@@ -1,0 +1,26 @@
+@import "https://ui-blocks.netlify.app/ui-blocks.css";
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+.app {
+  text-align: center;
+}
+
+main {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.form-control {
+  width: 40%;
+}
+
+.todo-task {
+  width: 90%;
+}
+
+.todos {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 1rem;
+}
