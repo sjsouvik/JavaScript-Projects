@@ -48,6 +48,7 @@ class Carousel {
     const carouselNav = this.addCarouselNav(carouselItems);
 
     const carouselBtns = carouselNav.querySelectorAll(".carousel-btn");
+
     carouselBtns.forEach((carouselBtn, i) => {
       carouselBtn.addEventListener("click", () => {
         //remove selected class from previously selected carousel buttons and carousel items
