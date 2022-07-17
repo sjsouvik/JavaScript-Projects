@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+.carousel {
+  position: relative;
+}
+
+.carousel-item {
+  padding: 1rem;
+  background-color: grey;
+  color: white;
+  font-size: 1.5rem;
+  height: 50vh;
+  text-align: center;
+  display: none;
+}
+
+.carousel-item.selected {
+  display: block;
+}
+
+.carousel-nav {
+  position: absolute;
+  left: 0;
+  bottom: 1rem;
+  text-align: center;
+  width: 100%;
+}
+
+.carousel-btn {
+  height: 0.8rem;
+  width: 0.8rem;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 0.25rem;
+}
+
+.carousel-btn.selected,
+.carousel-btn:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.prev,
+.next {
+  position: absolute;
+  top: 50%;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  font-weight: bold;
+  font-size: 1.5rem;
+  background-color: inherit;
+  transition: all 0.6s ease;
+}
+
+.prev:hover,
+.next:hover {
+  background-color: white;
+}
+
+.next {
+  right: 0;
+}
