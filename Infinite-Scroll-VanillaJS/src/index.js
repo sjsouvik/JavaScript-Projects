@@ -28,6 +28,7 @@ loadAndAddImages();
 // innerHeight --> height of the visible part in the screen
 // scrollHeight --> total height of the html document
 
+// not good for web performance, use IntersectionObserver instead
 window.addEventListener("scroll", () => {
   if (
     window.scrollY + window.innerHeight >=
