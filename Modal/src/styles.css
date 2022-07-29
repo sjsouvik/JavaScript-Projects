@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box;
+  /* margin: 0;
+  padding: 0; */
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+
+  visibility: hidden;
+}
+
+.modal.show {
+  visibility: visible;
+}
+
+.position-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: 20%;
+  height: 20%;
+}
+
+button {
+  cursor: pointer;
+}
