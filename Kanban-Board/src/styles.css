@@ -1,0 +1,67 @@
+body {
+  font-family: sans-serif;
+}
+
+#app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+h1 {
+  color: #406fd3;
+}
+
+.kanban {
+  display: flex;
+  width: 70%;
+  background-color: #406fd3;
+  color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.kanban-column {
+  flex: 1;
+}
+
+.kanban-column:not(:last-child) {
+  margin-right: 5rem;
+}
+
+.column-title {
+  font-size: 1.75rem;
+  font-weight: 200;
+  margin-bottom: 1rem;
+  user-select: none;
+}
+
+.item-title {
+  background-color: white;
+  color: black;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.dropzone {
+  height: 0.75rem;
+  transition: all 0.15s ease;
+}
+
+.dropzone.active {
+  height: 1.25rem;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.add-btn {
+  width: 100%;
+  padding: 0.5rem 0;
+  border-radius: 0.5rem;
+  border-color: transparent;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: white;
+}
