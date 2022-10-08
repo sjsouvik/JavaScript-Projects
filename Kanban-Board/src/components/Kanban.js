@@ -6,9 +6,9 @@ export class Kanban {
 
     const columns = document.createDocumentFragment();
 
-    Kanban.columns.map((column) => {
+    Kanban.columns.forEach((column) => {
       const columnView = new Column(column.id, column.name);
-      columns.appendChild(columnView);
+      columns.appendChild(columnView.elements.root);
     });
 
     this.root.appendChild(columns);
