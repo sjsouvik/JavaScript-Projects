@@ -1,6 +1,7 @@
 import { getElementFromHtml } from "../helper/utils";
 import { KanbanAPI } from "../KanbanAPI";
 import { Item } from "./Item";
+import { Dropzone } from "./Dropzone";
 
 export class Column {
   constructor(columnId, columnName) {
@@ -23,6 +24,7 @@ export class Column {
     this.elements.title.textContent = columnName;
     this.elements.root.dataset.id = columnId;
 
+    this.elements.items.appendChild(new Dropzone().root); //adding a dropzone inside kanban-items container before adding any items
     this.renderItems(KanbanAPI.getColumnItems(columnId), this.elements.items);
 
     this.elements.addBtn.addEventListener("click", () => {

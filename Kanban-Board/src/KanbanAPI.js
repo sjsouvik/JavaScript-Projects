@@ -22,16 +22,58 @@ export class KanbanAPI {
   }
 
   static updateItem(itemId, newProps) {
-    const { title } = newProps;
+    const { title, columnId, position } = newProps;
 
     const kanbanData = read();
 
-    const updatedKanbanData = kanbanData.map((column) => ({
-      ...column,
-      items: column.items.map((item) =>
-        item.id === itemId ? { ...item, title: title } : item
-      ),
-    }));
+    let updatedKanbanData;
+
+    if (columnId !== undefined && position !== undefined) {
+      let item, currentColumn;
+
+      // find the item and the current column using the given item id
+      for (const column of kanbanData) {
+        item = column.items.find((item) => item.id === itemId);
+
+        if (item) {
+          currentColumn = column;
+          break;
+        }
+      }
+
+      // remove the item from the current column
+      updatedKanbanData = kanbanData.map((column) =>
+        column.id === currentColumn.id
+          ? {
+              ...column,
+              items: column.items.filter((item) => item.id !== itemId),
+            }
+          : column
+      );
+
+      // add the item to the given column id at the given position
+      updatedKanbanData = updatedKanbanData.map((column) =>
+        column.id === columnId
+          ? {
+              ...column,
+              items: [
+                ...column.items.slice(0, position),
+                item,
+                ...column.items.slice(position),
+              ],
+            }
+          : column
+      );
+    }
+
+    if (title) {
+      updatedKanbanData = kanbanData.map((column) => ({
+        ...column,
+        items: column.items.map((item) =>
+          item.id === itemId ? { ...item, title } : item
+        ),
+      }));
+    }
 
     save(updatedKanbanData);
   }

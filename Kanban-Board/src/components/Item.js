@@ -1,10 +1,11 @@
 import { getElementFromHtml } from "../helper/utils";
 import { KanbanAPI } from "../KanbanAPI";
+import { Dropzone } from "./Dropzone";
 
 export class Item {
   constructor(itemId, title) {
     const itemHtml = `
-      <div class="item">
+      <div class="item" draggable="true">
         <div class="item-title" contenteditable="true"></div>
       </div>  
     `;
@@ -14,6 +15,9 @@ export class Item {
     this.elements.root = getElementFromHtml(itemHtml);
     this.elements.title = this.elements.root.querySelector(".item-title");
     this.elements.title.textContent = title;
+
+    const dropZoneView = new Dropzone();
+    this.elements.root.appendChild(dropZoneView.root);
 
     this.elements.root.dataset.id = itemId;
 
@@ -38,6 +42,14 @@ export class Item {
 
         this.elements.root.parentElement.removeChild(this.elements.root);
       }
+    });
+
+    this.elements.root.addEventListener("dragstart", (e) => {
+      e.dataTransfer.setData("text/plain", itemId);
+    });
+
+    this.elements.root.addEventListener("drop", (e) => {
+      e.preventDefault();
     });
   }
 }

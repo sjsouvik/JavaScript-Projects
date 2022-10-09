@@ -51,7 +51,7 @@ h1 {
 }
 
 .dropzone.active {
-  height: 1.25rem;
+  height: 4rem;
   background-color: rgba(0, 0, 0, 0.25);
 }
 
