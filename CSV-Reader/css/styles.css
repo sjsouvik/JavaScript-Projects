@@ -35,8 +35,17 @@ nav {
   margin-bottom: 1rem;
 }
 
+input[type="file"] {
+  opacity: 0;
+}
+
 .search {
   padding: 0.5rem;
+}
+
+.table-container {
+  max-height: 400px;
+  overflow: auto;
 }
 
 table {
@@ -47,7 +56,6 @@ table {
   font-weight: bold;
   font-size: 14px;
   background-color: #111111;
-  max-height: 400px;
 
   overflow: hidden;
 }

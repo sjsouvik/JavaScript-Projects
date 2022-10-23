@@ -1,4 +1,12 @@
+import { NavBar } from "./components/NavBar.js";
+import { Container } from "./components/Container.js";
 import { Table } from "./components/Table.js";
+import { csvToArray } from "../helper/utils.js";
+
+const app = document.getElementById("app");
+app.appendChild(new NavBar().root);
+
+app.appendChild(new Container().elements.root);
 
 const tableRoot = document.querySelector("#data-table");
 const fileInput = document.getElementById("fileInput");
@@ -10,38 +18,19 @@ const table = new Table(tableRoot);
 
 let columnHeaderData, data;
 
-function csvToArray(str, delimiter = ",") {
-  const headers = str.slice(0, str.indexOf("\n")).split(delimiter);
-
-  const rows = str.slice(str.indexOf("\n") + 1).split("\n");
-
-  const arr = rows.map(function (row) {
-    const values = row.split(delimiter);
-
-    return headers.reduce((object, header, index) => {
-      object[header] = values[index];
-      return object;
-    }, {});
-  });
-
-  return arr;
-}
-
 fileInput.addEventListener("change", (e) => {
   const csv = e.target.files[0];
 
   const reader = new FileReader();
 
-  reader.onload = function (e) {
+  reader.addEventListener("load", (e) => {
     const text = e.target.result;
     const arr = csvToArray(text, ";");
 
-    console.log(arr, Object.keys(arr[0]));
-
     columnHeaderData = Object.keys(arr[0]);
     data = arr.slice(0, arr.length - 1);
-    table.update(data.slice(0, 15), columnHeaderData);
-  };
+    table.update(data, columnHeaderData);
+  });
 
   reader.readAsText(csv);
 });
@@ -54,7 +43,7 @@ search.addEventListener("input", (e) => {
   );
 
   table.clear();
-  table.update(res.slice(0, 15), columnHeaderData);
+  table.update(res, columnHeaderData);
 });
 
 function loadTheme() {
