@@ -17,9 +17,8 @@ nav {
   display: flex;
   justify-content: center;
 
-  width: 60%;
+  width: 100%;
   height: 450px;
-  border: 1px solid black;
   margin-top: 4rem;
   padding: 2rem;
 
@@ -29,9 +28,18 @@ nav {
   transform: translate(-50%, -50%);
 }
 
+.load-csv {
+  padding: 0.5rem;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  max-width: 52rem;
+  width: 100%;
+}
+
 .row {
   display: flex;
   justify-content: space-between;
+  width: 100%;
   margin-bottom: 1rem;
 }
 
@@ -44,7 +52,7 @@ input[type="file"] {
 }
 
 .table-container {
-  max-height: 400px;
+  max-height: 24rem;
   overflow: auto;
 }
 
@@ -71,4 +79,11 @@ td {
   padding: 10px 20px;
   border: 1px solid #1b1b1b;
   background-color: #ffffff;
+}
+
+thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: white;
 }

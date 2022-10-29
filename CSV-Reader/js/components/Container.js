@@ -4,7 +4,7 @@ export class Container {
   constructor() {
     const containerHtml = `
     <main class="container">
-        <div>
+        <section class="load-csv">
           <div class="row">
             <button><label for="fileInput">Load CSV File</label></button>
             <input type="file" id="fileInput" />
@@ -13,7 +13,7 @@ export class Container {
           <div class="table-container">
             <table id="data-table"></table>
           </div>
-        </div>
+        </section>
     </main>
     `;
 
