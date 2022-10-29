@@ -58,14 +58,6 @@ input[type="file"] {
 
 table {
   border-collapse: collapse;
-  border-radius: 5px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
-  overflow: hidden;
-  font-weight: bold;
-  font-size: 14px;
-  background-color: #111111;
-
-  overflow: hidden;
 }
 
 th {
@@ -77,8 +69,8 @@ th {
 th,
 td {
   padding: 10px 20px;
-  border: 1px solid #1b1b1b;
-  background-color: #ffffff;
+  border: 1px solid black;
+  background-color: white;
 }
 
 thead {
