@@ -1,6 +1,17 @@
+import { getElementFromHtml } from "../../helper/utils.js";
+
 export class Table {
-  constructor(root) {
-    this.root = root;
+  constructor() {
+    const tableHtml = `
+    <div class="table-container">
+      <table id="data-table"></table>
+    </div>
+    `;
+
+    this.elements = {};
+
+    this.elements.root = getElementFromHtml(tableHtml);
+    this.elements.table = this.elements.root.querySelector("#data-table");
   }
 
   update(data, headerColumns = []) {
@@ -11,11 +22,11 @@ export class Table {
   }
 
   clear() {
-    this.root.innerHTML = "";
+    this.elements.table.innerHTML = "";
   }
 
   setHeader(headerColumns) {
-    this.root.insertAdjacentHTML(
+    this.elements.table.insertAdjacentHTML(
       "afterbegin",
       `
             <thead>
@@ -38,7 +49,7 @@ export class Table {
             `;
     });
 
-    this.root.insertAdjacentHTML(
+    this.elements.table.insertAdjacentHTML(
       "beforeend",
       `
             <tbody>

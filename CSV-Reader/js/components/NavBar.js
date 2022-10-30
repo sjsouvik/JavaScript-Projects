@@ -1,3 +1,5 @@
+import { getElementFromHtml } from "../../helper/utils.js";
+
 export class NavBar {
   constructor() {
     const navbarHtml = `
@@ -7,11 +9,36 @@ export class NavBar {
       </nav>
     `;
 
-    this.root = this.getElementFromHtml(navbarHtml);
+    this.elements = {};
+    this.elements.root = getElementFromHtml(navbarHtml);
+
+    this.elements.themeSwitchBtn =
+      this.elements.root.querySelector("#themeSwitchBtn");
+    this.elements.themeStyleLink = document.getElementById("themeStyleLink");
+
+    this.elements.themeSwitchBtn.addEventListener("click", () => {
+      const currentTheme = localStorage.getItem("theme") || "light";
+
+      if (currentTheme === "light") {
+        this.updateTheme("dark");
+      } else {
+        this.updateTheme("light");
+      }
+    });
+
+    this.loadDefaultTheme();
   }
 
-  getElementFromHtml(html) {
-    const range = document.createRange();
-    return range.createContextualFragment(html.trim()).children[0];
+  loadDefaultTheme() {
+    const currentTheme = localStorage.getItem("theme") || "light";
+    this.updateTheme(currentTheme);
+  }
+
+  updateTheme(themeName) {
+    this.elements.themeStyleLink.setAttribute(
+      "href",
+      `themes/${themeName}.css`
+    );
+    localStorage.setItem("theme", themeName);
   }
 }
