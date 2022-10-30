@@ -27,8 +27,13 @@ export class Container {
 
     this.elements.loadCSVSection.appendChild(table.elements.root);
 
+    this.addEvents(table);
+  }
+
+  addEvents(table) {
     let columnHeaderData, data;
-    this.elements.fileInput.addEventListener("change", (e) => {
+
+    const fileUploadHandler = (e) => {
       const csv = e.target.files[0];
 
       const reader = new FileReader();
@@ -43,9 +48,9 @@ export class Container {
       });
 
       reader.readAsText(csv);
-    });
+    };
 
-    this.elements.searchInput.addEventListener("input", (e) => {
+    const searchHandler = (e) => {
       const searchText = e.target.value.toLowerCase();
 
       const res = data.filter((row) =>
@@ -54,6 +59,9 @@ export class Container {
 
       table.clear();
       table.update(res, columnHeaderData);
-    });
+    };
+
+    this.elements.fileInput.addEventListener("change", fileUploadHandler);
+    this.elements.searchInput.addEventListener("input", searchHandler);
   }
 }
