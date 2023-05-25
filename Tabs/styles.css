@@ -1,0 +1,46 @@
+tabs {
+  display: flex;
+  flex-direction: column;
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  width: 20rem;
+
+  margin: 10rem auto;
+}
+
+header {
+  border-bottom: 1px solid lightgray;
+}
+
+nav {
+  display: flex;
+}
+
+nav a {
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 1rem 2rem;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+nav a:hover {
+  background-color: lightgray;
+}
+
+.tab-content {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  height: 30rem;
+
+  overflow: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.tab-content article {
+  padding: 1rem;
+  scroll-snap-align: start;
+}
