@@ -1,3 +1,5 @@
+import { debounce } from "./helper/utils.js";
+
 class Tabs {
   constructor(tabsRef) {
     this.tabsRef = tabsRef;
@@ -54,8 +56,10 @@ class Tabs {
       }
     };
 
+    const improvedScrollHandler = debounce(tabContentScrollHandler, 100);
+
     this.tabNav.addEventListener("click", tabClickHandler);
-    this.tabContent.addEventListener("scroll", tabContentScrollHandler);
+    this.tabContent.addEventListener("scroll", improvedScrollHandler);
   }
 }
 
