@@ -1,0 +1,41 @@
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.toast {
+  border: 1px solid lightgray;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  z-index: 1;
+  background-color: white;
+
+  animation: fadeIn 0.5s ease;
+}
+
+.toasts-container {
+  pointer-events: none;
+  position: fixed;
+  bottom: 1rem;
+
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.toast-button {
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+}
