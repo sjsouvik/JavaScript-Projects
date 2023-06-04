@@ -1,3 +1,3 @@
-# Machine Coding: JavaScript Projects
+# JavaScript Projects
 
-This is to keep all Vanilla JS projects without using any library, so that anyone can refer to it to practice for machine coding round.
+This is to keep all Vanilla JS projects which can help to learn how to write modular JS, DOM manipulation without using any library.
