@@ -12,13 +12,13 @@ body {
   height: 0.75rem;
   background-color: lightgray;
   border-radius: 0.5rem;
+  overflow: hidden;
 }
 
 .progress {
   width: 0%;
   height: 100%;
   background-color: lightgreen;
-  border-radius: 0.5rem;
 }
 
 .btn {
