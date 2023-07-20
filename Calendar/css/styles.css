@@ -1,0 +1,12 @@
+.month {
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  width: 25%;
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+  text-align: center;
+}
