@@ -17,7 +17,7 @@ export class Kanban {
   static get columns() {
     return [
       { id: 1, name: "Backlog" },
-      { id: 2, name: "InProg" },
+      { id: 2, name: "In Progress" },
       { id: 3, name: "Completed" },
     ];
   }
