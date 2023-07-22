@@ -54,4 +54,22 @@ select {
 
 .selected-date {
   text-align: center;
+  font-size: 1.1rem;
+}
+
+.current-date {
+  border: 1px solid black;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+}
+
+.today-btn {
+  padding: 0.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.disable-btn {
+  cursor: not-allowed;
 }

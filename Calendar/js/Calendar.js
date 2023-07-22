@@ -4,6 +4,7 @@ import {
   days,
   months,
   get1stDayOfMonth,
+  isCurrentDate,
 } from "./utils.js";
 
 export class Calendar {
@@ -12,22 +13,27 @@ export class Calendar {
         <div class="container">
             <section class="controls"></section>
             <section class="month"></section>
+            <button class="today-btn disable-btn" disabled>Today</button>
             <p class="selected-date"></p>
         </div>
     `;
     this.container = getElementFromHtml(calendarHtml);
     this.controls = this.container.querySelector(".controls");
     this.monthView = this.container.querySelector(".month");
+    this.todayBtn = this.container.querySelector(".today-btn");
     this.selectedDate = this.container.querySelector(".selected-date");
 
-    this.selectedMonth = months[new Date().getMonth()];
-    this.selectedYear = new Date().getFullYear();
-    this.selectedDate.textContent = `${
-      this.selectedMonth
-    } ${new Date().getDate()}, ${this.selectedYear}`;
+    const date = new Date();
+    this.currentDate = date.getDate();
+    this.currentMonth = months[date.getMonth()];
+    this.currentYear = date.getFullYear();
+    this.selectedMonth = this.currentMonth;
+    this.selectedYear = this.currentYear;
+    this.selectedDate.textContent = `${this.currentMonth} ${this.currentDate}, ${this.currentYear}`;
 
     this.renderControls();
     this.renderMonthView(this.selectedMonth, this.selectedYear);
+    this.addEvents();
   }
 
   renderControls() {
@@ -52,20 +58,6 @@ export class Calendar {
     this.yearControl = getElementFromHtml(yearSelect);
     this.controls.appendChild(this.yearControl);
     this.yearControl.value = this.selectedYear;
-
-    this.addEvents();
-  }
-
-  addEvents() {
-    this.monthControl.addEventListener("change", (e) => {
-      this.selectedMonth = e.target.value;
-      this.renderMonthView(this.selectedMonth, this.selectedYear);
-    });
-
-    this.yearControl.addEventListener("change", (e) => {
-      this.selectedYear = e.target.value;
-      this.renderMonthView(this.selectedMonth, this.selectedYear);
-    });
   }
 
   renderDays() {
@@ -103,14 +95,50 @@ export class Calendar {
 
     for (let day = 1; day <= numberOfDays; day++) {
       const dateElement = getElementFromHtml(
-        `<div class="date ${
-          sundays.includes(day) ? "sunday" : ""
+        `<div class="date ${sundays.includes(day) ? "sunday" : ""} ${
+          isCurrentDate(day, this.selectedMonth, Number(this.selectedYear))
+            ? "current-date"
+            : ""
         }">${day}</div>`
       );
       dateFragment.appendChild(dateElement);
     }
 
     this.monthView.appendChild(dateFragment);
+  }
+
+  enableTodayBtn() {
+    this.todayBtn.classList.remove("disable-btn");
+    this.todayBtn.disabled = false;
+  }
+
+  disableTodayBtn() {
+    this.todayBtn.classList.add("disable-btn");
+    this.todayBtn.disabled = true;
+  }
+
+  addEvents() {
+    this.monthControl.addEventListener("change", (e) => {
+      this.selectedMonth = e.target.value;
+      this.renderMonthView(this.selectedMonth, this.selectedYear);
+
+      if (this.selectedMonth !== this.currentMonth) {
+        this.enableTodayBtn();
+      } else {
+        this.disableTodayBtn();
+      }
+    });
+
+    this.yearControl.addEventListener("change", (e) => {
+      this.selectedYear = e.target.value;
+      this.renderMonthView(this.selectedMonth, this.selectedYear);
+
+      if (this.selectedYear !== this.currentYear) {
+        this.enableTodayBtn();
+      } else {
+        this.disableTodayBtn();
+      }
+    });
 
     this.monthView.addEventListener("click", (e) => {
       const targetEl = e.target.closest("div");
@@ -123,6 +151,17 @@ export class Calendar {
       this.selectedDateEl = targetEl;
       targetEl.classList.add("selected");
       this.selectedDate.textContent = `${this.selectedMonth} ${targetEl.textContent}, ${this.selectedYear}`;
+    });
+
+    this.todayBtn.addEventListener("click", () => {
+      this.monthControl.value = this.currentMonth;
+      this.selectedMonth = this.currentMonth;
+      this.yearControl.value = this.currentYear;
+      this.selectedYear = this.currentYear;
+
+      this.renderMonthView(this.currentMonth, this.currentYear);
+      this.selectedDate.textContent = `${this.currentMonth} ${this.currentDate}, ${this.currentYear}`;
+      this.disableTodayBtn();
     });
   }
 }

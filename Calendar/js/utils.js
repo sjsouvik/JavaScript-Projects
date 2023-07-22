@@ -11,6 +11,19 @@ export const get1stDayOfMonth = (month, year) => {
   return new Date(year, month, 1).getDay();
 };
 
+export const isCurrentDate = (givenDate, selectedMonth, selectedYear) => {
+  const date = new Date();
+  const currentDate = date.getDate();
+  const currentMonth = months[date.getMonth()];
+  const currentYear = date.getFullYear();
+
+  return (
+    currentDate === givenDate &&
+    selectedYear === currentYear &&
+    selectedMonth === currentMonth
+  );
+};
+
 export const days = ["S", "M", "T", "W", "T", "F", "S"];
 
 export const months = [
