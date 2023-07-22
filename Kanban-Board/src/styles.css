@@ -9,8 +9,9 @@ body {
   flex-direction: column;
 }
 
-h1 {
+.app-title {
   color: #406fd3;
+  text-align: center;
 }
 
 .kanban {
