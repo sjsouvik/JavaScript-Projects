@@ -11,7 +11,7 @@
 }
 
 .month {
-  height: 15rem;
+  height: 20rem;
 
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -27,4 +27,31 @@
 
 select {
   padding: 0.25rem 0.5rem;
+}
+
+.day {
+  color: gray;
+}
+
+.date {
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sunday {
+  color: red;
+}
+
+.selected {
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+.selected-date {
+  text-align: center;
 }

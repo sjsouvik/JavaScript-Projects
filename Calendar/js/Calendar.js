@@ -10,16 +10,21 @@ export class Calendar {
   constructor() {
     const calendarHtml = `
         <div class="container">
-            <div class="controls"></div>
-            <div class="month"></div>
+            <section class="controls"></section>
+            <section class="month"></section>
+            <p class="selected-date"></p>
         </div>
     `;
     this.container = getElementFromHtml(calendarHtml);
-    this.monthView = this.container.querySelector(".month");
     this.controls = this.container.querySelector(".controls");
+    this.monthView = this.container.querySelector(".month");
+    this.selectedDate = this.container.querySelector(".selected-date");
 
     this.selectedMonth = months[new Date().getMonth()];
     this.selectedYear = new Date().getFullYear();
+    this.selectedDate.textContent = `${
+      this.selectedMonth
+    } ${new Date().getDate()}, ${this.selectedYear}`;
 
     this.renderControls();
     this.renderMonthView(this.selectedMonth, this.selectedYear);
@@ -67,7 +72,7 @@ export class Calendar {
     const daysFragment = document.createDocumentFragment();
 
     for (const day of days) {
-      const dayElement = getElementFromHtml(`<div>${day}</div>`);
+      const dayElement = getElementFromHtml(`<div class="day">${day}</div>`);
       daysFragment.appendChild(dayElement);
     }
 
@@ -81,10 +86,14 @@ export class Calendar {
 
     const indexOfMonth = months.indexOf(month);
     const numberOfDays = getDays(indexOfMonth, year);
-    const day1 = get1stDayOfMonth(indexOfMonth, year);
+    const indexOf1stDay = get1stDayOfMonth(indexOfMonth, year);
+    const sundays = [];
+    for (let i = 0; i <= 5; i++) {
+      sundays.push(1 - indexOf1stDay + 7 * i);
+    }
 
     const gapFragment = document.createDocumentFragment();
-    for (let i = 1; i <= day1; i++) {
+    for (let i = 1; i <= indexOf1stDay; i++) {
       gapFragment.appendChild(getElementFromHtml(`<div></div>`));
     }
 
@@ -92,11 +101,28 @@ export class Calendar {
 
     const dateFragment = document.createDocumentFragment();
 
-    for (let i = 1; i <= numberOfDays; i++) {
-      const dateElement = getElementFromHtml(`<div>${i}</div>`);
+    for (let day = 1; day <= numberOfDays; day++) {
+      const dateElement = getElementFromHtml(
+        `<div class="date ${
+          sundays.includes(day) ? "sunday" : ""
+        }">${day}</div>`
+      );
       dateFragment.appendChild(dateElement);
     }
 
     this.monthView.appendChild(dateFragment);
+
+    this.monthView.addEventListener("click", (e) => {
+      const targetEl = e.target.closest("div");
+
+      if (!this.monthView.contains(targetEl)) {
+        return;
+      }
+
+      this.selectedDateEl?.classList.remove("selected");
+      this.selectedDateEl = targetEl;
+      targetEl.classList.add("selected");
+      this.selectedDate.textContent = `${this.selectedMonth} ${targetEl.textContent}, ${this.selectedYear}`;
+    });
   }
 }
