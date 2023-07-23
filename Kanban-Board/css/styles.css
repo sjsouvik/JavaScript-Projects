@@ -9,6 +9,21 @@ body {
   flex-direction: column;
 }
 
+.app-header {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.theme-btn {
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border-color: transparent;
+  border-radius: 0.5rem;
+}
+
 .app-title {
   color: var(--primary-color);
   text-align: center;

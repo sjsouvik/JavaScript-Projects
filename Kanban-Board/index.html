@@ -6,11 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kanban Board</title>
     <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/themes/light.css" />
+    <link rel="stylesheet" id="themeStyleLink" href="css/themes/light.css" />
   </head>
   <body>
     <main id="app">
-      <h1 class="app-title">Personal Kanban Board</h1>
+      <header class="app-header">
+        <h1 class="app-title">Personal Kanban Board</h1>
+        <button class="theme-btn">Light</button>
+      </header>
       <section class="kanban"></section>
     </main>
     <script src="js/index.js" type="module"></script>
