@@ -1,7 +1,7 @@
-import { getElementFromHtml } from "../helper/utils";
-import { KanbanAPI } from "../KanbanAPI";
-import { Item } from "./Item";
-import { Dropzone } from "./Dropzone";
+import { getElementFromHtml } from "../helper/utils.js";
+import { KanbanAPI } from "../KanbanAPI.js";
+import { Item } from "./Item.js";
+import { Dropzone } from "./Dropzone.js";
 
 export class Column {
   constructor(columnId, columnName) {

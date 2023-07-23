@@ -1,5 +1,5 @@
-import { otherWayToGetElementFromHtml } from "../helper/utils";
-import { KanbanAPI } from "../KanbanAPI";
+import { otherWayToGetElementFromHtml } from "../helper/utils.js";
+import { KanbanAPI } from "../KanbanAPI.js";
 
 export class Dropzone {
   constructor() {

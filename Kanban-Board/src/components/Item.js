@@ -1,6 +1,6 @@
-import { getElementFromHtml } from "../helper/utils";
-import { KanbanAPI } from "../KanbanAPI";
-import { Dropzone } from "./Dropzone";
+import { getElementFromHtml } from "../helper/utils.js";
+import { KanbanAPI } from "../KanbanAPI.js";
+import { Dropzone } from "./Dropzone.js";
 
 export class Item {
   constructor(itemId, title) {

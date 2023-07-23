@@ -10,14 +10,14 @@ body {
 }
 
 .app-title {
-  color: #406fd3;
+  color: var(--primary-color);
   text-align: center;
 }
 
 .kanban {
   display: flex;
   width: 70%;
-  background-color: #406fd3;
+  background-color: var(--primary-color);
   color: white;
   padding: 1rem;
   border-radius: 0.5rem;

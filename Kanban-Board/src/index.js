@@ -1,4 +1,3 @@
-import "./styles.css";
-import { Kanban } from "./components/Kanban";
+import { Kanban } from "./components/Kanban.js";
 
 new Kanban(document.querySelector(".kanban"));
