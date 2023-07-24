@@ -1,6 +1,11 @@
 :root {
   --primary-color: #121212;
-  --btn-bg-color: #404040;
-  --drop-zone-bg: rgba(0, 0, 0, 0.25);
+  --btn-bg-color: #192734;
+  --theme-btn-bg: #192734;
+  --drop-zone-bg: #282828;
+  --item-bg: #3a3b3c;
+  --item-text-color: white;
   --white: white;
+  --app-bg: black;
+  --app-title-color: white;
 }

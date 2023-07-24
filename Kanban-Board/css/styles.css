@@ -1,41 +1,44 @@
 body {
   font-family: sans-serif;
+  margin: 0;
 }
 
 #app {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  height: 100vh;
+  background-color: var(--app-bg);
 }
 
 .app-header {
   display: flex;
-  gap: 1rem;
+  justify-content: center;
   align-items: center;
+  gap: 1rem;
 }
 
 .theme-btn {
   padding: 0.25rem 0.5rem;
   cursor: pointer;
-  background-color: var(--primary-color);
+  background-color: var(--theme-btn-bg);
   color: var(--white);
   border-color: transparent;
   border-radius: 0.5rem;
 }
 
 .app-title {
-  color: var(--primary-color);
+  color: var(--app-title-color);
   text-align: center;
 }
 
 .kanban {
   display: flex;
-  width: 70%;
+  width: 80%;
   background-color: var(--primary-color);
   color: var(--white);
   padding: 1rem;
   border-radius: 0.5rem;
+  margin: auto;
+  max-height: 70%;
+  overflow: auto;
 }
 
 .kanban-column {
@@ -55,8 +58,8 @@ body {
 }
 
 .item-title {
-  background-color: var(--white);
-  color: black;
+  background-color: var(--item-bg);
+  color: var(--item-text-color);
   padding: 0.5rem;
   border-radius: 0.25rem;
   cursor: pointer;
@@ -75,6 +78,7 @@ body {
 .add-btn {
   width: 100%;
   padding: 0.5rem 0;
+  margin-bottom: 1rem;
   border-radius: 0.5rem;
   border-color: transparent;
   font-size: 1rem;
