@@ -25,10 +25,25 @@
     padding: 0.5rem 1rem;
 }
 
+.email-type.active {
+    background-color: #f1f1f1;
+}
+
 .email-type:hover {
     background-color: #f1f1f1;
 }
 
 .mails {
+    border: 1px solid #f1f1f1;
+}
+
+.mails ul {
+    padding: 0;
+}
+
+.mail {
+    list-style: none;
     padding: 1rem;
+    border-top: 1px solid #f1f1f1;
+    border-bottom: 1px solid #f1f1f1;
 }

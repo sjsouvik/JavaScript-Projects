@@ -1,5 +1,15 @@
 import { Home } from "./Home.js";
-import { routes } from "./utils.js";
+import { MailList } from "./MailList.js";
+
+export const routes = [
+  { path: "/", view: (mailsRoot) => new MailList("inbox", mailsRoot) },
+  { path: "/starred", view: (mailsRoot) => new MailList("starred", mailsRoot) },
+  {
+    path: "/important",
+    view: (mailsRoot) => new MailList("important", mailsRoot),
+  },
+  { path: "/*", view: "<h3>Oops! this page is not found</h3>" },
+];
 
 const home = new Home();
 
@@ -15,10 +25,13 @@ const router = () => {
     return;
   }
 
-  home.elements.mails.innerHTML = matchedRoute.view;
+  matchedRoute.view(home.elements.mails);
 };
 
-window.addEventListener("popstate", router);
+window.addEventListener("popstate", () => {
+  router();
+  home.updateActiveRoute();
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   document.body.addEventListener("click", (e) => {
@@ -26,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       history.pushState(null, null, e.target.href);
       router();
+      home.updateActiveRoute(e.target);
     }
   });
 

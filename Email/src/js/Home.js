@@ -4,16 +4,18 @@ export class Home {
   constructor() {
     let childs = "";
     this.getSections().forEach((section) => {
-      childs += `<a href="/${section.name.toLowerCase()}" class="email-type">${
-        section.name
-      }</a>`;
+      childs += `<a href="${section.path}" id="${
+        section.path
+      }" class="email-type ${
+        location.pathname === section.path ? "active" : ""
+      }">${section.name}</a>`;
     });
 
     const container = `
       <div class="layout">
         <section class="side-bar">${childs}</section>
         <section class="mails"></section>
-        <section class="mail"></section>
+        <section class="mail-details"></section>
       </div>
       `;
 
@@ -21,14 +23,23 @@ export class Home {
 
     const root = getElementFromHtml(container);
     this.elements.root = root;
+    this.elements.activeRoute = root.querySelector(".active");
     this.elements.mails = root.querySelector(".mails");
+    this.elements.mailDetails = root.querySelector(".mail-details");
+  }
+
+  updateActiveRoute(route = "") {
+    this.elements.activeRoute.classList.remove("active");
+    this.elements.activeRoute =
+      route || document.getElementById(location.pathname);
+    this.elements.activeRoute.classList.add("active");
   }
 
   getSections() {
     return [
-      { name: "Starred", mails: [] },
-      { name: "Important", mails: [] },
-      { name: "Sent", mails: [] },
+      { name: "Inbox", path: "/", mails: [] },
+      { name: "Starred", path: "/starred", mails: [] },
+      { name: "Important", path: "/important", mails: [] },
     ];
   }
 }
