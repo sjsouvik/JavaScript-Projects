@@ -26,6 +26,7 @@ const router = () => {
   }
 
   matchedRoute.view(home.elements.mails);
+  home.elements.mailDetails.innerHTML = "";
 };
 
 window.addEventListener("popstate", () => {

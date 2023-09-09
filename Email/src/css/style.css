@@ -46,4 +46,20 @@
     padding: 1rem;
     border-top: 1px solid #f1f1f1;
     border-bottom: 1px solid #f1f1f1;
+    cursor: pointer;
+}
+
+.mail.active {
+    background-color: #f1f1f1;
+}
+
+.line-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.mail-details {
+    padding: 1rem;
 }
