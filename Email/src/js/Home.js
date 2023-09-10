@@ -13,9 +13,7 @@ export class Home {
 
     const container = `
       <div class="layout">
-        <section class="side-bar">${childs}</section>
-        <section class="mails"></section>
-        <section class="mail-details"></section>
+        <section class="side-bar">${childs}</section>        
       </div>
       `;
 
@@ -24,8 +22,6 @@ export class Home {
     const root = getElementFromHtml(container);
     this.elements.root = root;
     this.elements.activeRoute = root.querySelector(".active");
-    this.elements.mails = root.querySelector(".mails");
-    this.elements.mailDetails = root.querySelector(".mail-details");
   }
 
   updateActiveRoute(route = "") {

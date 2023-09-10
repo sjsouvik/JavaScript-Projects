@@ -2,11 +2,11 @@ import { Home } from "./Home.js";
 import { MailList } from "./MailList.js";
 
 export const routes = [
-  { path: "/", view: (mailsRoot) => new MailList("inbox", mailsRoot) },
-  { path: "/starred", view: (mailsRoot) => new MailList("starred", mailsRoot) },
+  { path: "/", view: (root) => new MailList("inbox", root) },
+  { path: "/starred", view: (root) => new MailList("starred", root) },
   {
     path: "/important",
-    view: (mailsRoot) => new MailList("important", mailsRoot),
+    view: (root) => new MailList("important", root),
   },
   { path: "/*", view: "<h3>Oops! this page is not found</h3>" },
 ];
@@ -25,8 +25,7 @@ const router = () => {
     return;
   }
 
-  matchedRoute.view(home.elements.mails);
-  home.elements.mailDetails.innerHTML = "";
+  matchedRoute.view(home.elements.root);
 };
 
 window.addEventListener("popstate", () => {

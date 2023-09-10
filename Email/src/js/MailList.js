@@ -1,6 +1,7 @@
 import { MailDetails } from "./MailDetails.js";
+import { getElementFromHtml } from "./utils.js";
 
-const mails = [
+let mails = [
   {
     id: crypto.randomUUID(),
     subject: "mail 1",
@@ -18,34 +19,66 @@ const mails = [
 ];
 
 export class MailList {
-  constructor(emailType, mailsRoot) {
+  constructor(emailType, root) {
     this.elements = {};
 
-    this.renderMails(emailType, mailsRoot);
-    this.addEvents(mailsRoot);
+    document.querySelector(".mails")?.remove();
+    document.querySelector(".mail-details")?.remove();
+
+    this.elements.mailsSection = getElementFromHtml(
+      `<section class="mails"></section>`
+    );
+    root.append(this.elements.mailsSection);
+
+    this.elements.mailDetails = getElementFromHtml(
+      `<section class="mail-details"></section>`
+    );
+    this.elements.mailDetails.innerHTML = "";
+    root.append(this.elements.mailDetails);
+
+    this.renderMails(emailType);
+    this.addEvents();
   }
 
-  renderMails(emailType, mailsRoot) {
+  renderMails(emailType) {
     const filteredMails = mails.filter((mail) => mail.tags.includes(emailType));
 
     let mailList = "";
     filteredMails.forEach((mail) => {
+      const markedAsImportant = mail.tags.some((tag) => tag === "important");
+
       const mailEl = `
         <li class="mail" data-mail-id=${mail.id}>            
             <h2>${mail.subject}</h2>
-            <p class="line-2">${mail.content}</p>            
+            <p class="line-2">${mail.content}</p> 
+            <section class="actions">
+              <button data-action="read">Read</button>           
+              <button data-action="important">${
+                markedAsImportant ? "Marked as Important" : "Mark as important"
+              }</button>           
+            </section>
         </li>
         `;
       mailList += mailEl;
     });
 
-    mailsRoot.innerHTML = `<ul>${mailList}</ul>`;
+    this.elements.mailsSection.innerHTML = `<ul>${mailList}</ul>`;
   }
 
-  addEvents(mailsRoot) {
-    mailsRoot.addEventListener("click", (e) => {
+  addEvents() {
+    this.elements.mailsSection.addEventListener("click", (e) => {
       const selectedMail = e.target.closest("li");
       const selectedMailId = selectedMail?.dataset.mailId;
+
+      if (e.target.dataset.action === "important") {
+        this.handleMarkAsImportant({
+          targetElement: e.target,
+          selectedMail,
+          selectedMailId,
+        });
+        return;
+      }
+
       const selectedMailDetails = mails.find(
         (mail) => mail.id === selectedMailId
       );
@@ -53,9 +86,35 @@ export class MailList {
       this.selectedMail?.classList.remove("active");
       this.selectedMail = selectedMail;
       selectedMail.classList.add("active");
-      document.querySelector(".mail-details").innerHTML = new MailDetails(
+      this.elements.mailDetails.innerHTML = new MailDetails(
         selectedMailDetails
       ).root;
     });
+  }
+
+  handleMarkAsImportant({ targetElement, selectedMail, selectedMailId }) {
+    if (targetElement.textContent.toLowerCase() === "mark as important") {
+      mails = mails.map((mail) =>
+        mail.id === selectedMailId
+          ? { ...mail, tags: mail.tags.concat("important") }
+          : mail
+      );
+
+      targetElement.textContent = "Marked as important";
+    } else {
+      mails = mails.map((mail) =>
+        mail.id === selectedMailId
+          ? {
+              ...mail,
+              tags: mail.tags.filter((tag) => tag !== "important"),
+            }
+          : mail
+      );
+      targetElement.textContent = "Mark as important";
+      if (location.pathname.includes("important")) {
+        selectedMail.remove();
+        this.elements.mailDetails.innerHTML = "";
+      }
+    }
   }
 }
