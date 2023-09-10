@@ -49,6 +49,15 @@
     cursor: pointer;
 }
 
+.mail-subject {
+    font-weight: 300;
+    font-size: 1.25rem;
+}
+
+.mail.unread {
+    font-weight: bold;
+}
+
 .mail.active {
     background-color: #f1f1f1;
 }
