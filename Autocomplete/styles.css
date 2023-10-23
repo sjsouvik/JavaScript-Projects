@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0
+}
+
+#root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 20%;
+}
+
+.search-box {
+    padding: 0.25rem;
+    width: 100%;
+}
+
+.search-list {
+    border: 1px solid lightgray;
+}
+
+.search-item {
+    list-style-type: none;
+    padding: 0.5rem;
+}
+
+.search-item:not(:last-child) {
+    border-bottom: 1px solid lightgray;
+}
