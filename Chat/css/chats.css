@@ -1,0 +1,22 @@
+.chats {
+  list-style-type: none;
+  padding: 0;
+  overflow: auto;
+}
+
+.chat-item {
+  display: flex;
+
+  gap: 1rem;
+  border: 1px solid #f1f1f1;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.latest-message-date {
+  margin-left: auto;
+}
+
+.chat-item.selected {
+  background-color: #f1f3f6;
+}

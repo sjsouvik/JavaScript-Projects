@@ -1,0 +1,108 @@
+.chat-view {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 1rem;
+  flex: 1;
+  background-color: #f1f3f6;
+}
+
+.chat-title {
+  padding: 0.5rem;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  background-color: white;
+  font-weight: bold;
+}
+
+.messages-section {
+  overflow: auto;
+  position: relative;
+}
+
+.no-msg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+}
+
+.messages {
+  list-style-type: none;
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.msg-date {
+  justify-self: center;
+  background-color: white;
+  border-radius: 1rem;
+  padding: 0.1rem 0.85rem;
+}
+
+.msg {
+  padding: 0.5rem;
+  background-color: #027cd5;
+  color: white;
+
+  max-width: 60%;
+  word-break: break-word;
+}
+
+.user-msg {
+  justify-self: right;
+  border-radius: 0.5rem 0 0.5rem 0.5rem;
+}
+
+.bot-msg {
+  justify-self: left;
+  border-radius: 0 0.5rem 0.5rem 0.5rem;
+}
+
+.option-msg {
+  background-color: white;
+  color: black;
+}
+
+.msg-time {
+  margin-top: 0.25rem;
+  text-align: right;
+  font-size: 0.75rem;
+}
+
+.msg-options {
+  list-style-type: none;
+  padding: 0;
+  background-color: lightgray;
+  margin-top: 1rem;
+}
+
+.msg-option {
+  padding: 0.5rem;
+  text-align: center;
+  border: 1px solid gray;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.option-text {
+  color: #027cd5;
+}
+
+.option-subtxt {
+  margin-top: 1rem;
+  color: gray;
+}
+
+.send-message {
+  display: flex;
+}
+
+.message-input {
+  width: 96%;
+  padding: 0.5rem;
+  font-size: 1.1rem;
+}

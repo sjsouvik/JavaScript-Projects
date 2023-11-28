@@ -1,0 +1,30 @@
+@import url("./chats.css");
+@import url("./ChatDetails.css");
+
+* {
+  margin: 0;
+}
+
+#app {
+  font-family: sans-serif;
+}
+
+.container {
+  height: 38.75rem;
+}
+
+.chat-list {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 1rem;
+}
+
+.search-box {
+  padding: 0.5rem;
+  font-size: 1.1rem;
+  width: 100%;
+}
+
+.divide {
+  display: flex;
+}
