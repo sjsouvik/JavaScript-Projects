@@ -7,8 +7,6 @@ body {
 }
 
 #root {
-  position: relative;
-
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -16,22 +14,29 @@ body {
 
 .slot {
   display: flex;
-  align-items: center;
   gap: 1rem;
 }
 
-.line {
+.time {
+  width: 3rem;
+  text-align: right;
+}
+
+.slot-events {
+  position: relative;
   border-top: 1px solid lightgray;
   width: 100%;
 }
 
 .event {
   position: absolute;
-  left: 5rem;
 
   width: 100%;
   background-color: lightcoral;
   color: white;
   border-radius: 0.5rem;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
 }

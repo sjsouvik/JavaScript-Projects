@@ -1,10 +1,17 @@
 import { getElement } from "./utils.js";
 
+const events = [
+  { startTime: "1:30", endTime: "2:00" },
+  { startTime: "3:45", endTime: "4:45" },
+];
+
 class DayView {
   constructor(root) {
     this.root = root;
     this.render();
-    this.renderEvents();
+
+    this.events = this.transformData(events);
+    this.renderEvents(events);
   }
 
   render() {
@@ -13,10 +20,12 @@ class DayView {
       .map(
         (_, index) =>
           `<div class="slot">
-                <div>${index > 12 ? index % 12 : index}${
+              <div class="time">${index > 12 ? index % 12 : index}${
             index > 12 ? "PM" : "AM"
           }</div>
-                <div class="line"></div>
+              <div class="slot-events" data-hour=${index}>
+                
+              </div>  
             </div>`
       )
       .join("");
@@ -26,35 +35,43 @@ class DayView {
   }
 
   renderEvents() {
-    const events = [{ startTime: "1:00", endTime: "2:00" }];
-
-    const fragment = document.createDocumentFragment();
-    events.forEach((event) => {
-      const eventHtml = `
+    this.events.forEach(
+      ({ startTime, endTime, startHour, startMin, endHour, endMin }) => {
+        const eventHtml = `
         <div class="event">
             <p>
-                ${event.startTime} - ${event.endTime}
+              ${startTime} - ${endTime}
             </p>
         </div>`;
 
-      const eventNode = getElement(eventHtml);
+        const eventNode = getElement(eventHtml);
 
-      const [startHour, startMin] = event.startTime.split(":");
-      const [endHour, endMin] = event.endTime.split(":");
+        // const top = (startHour + startMin / 60) * 51;
+        const top = (startMin * 51) / 60;
+        const height =
+          (endHour + endMin / 60 - (startHour + startMin / 60)) * 51;
+        const eventEl = eventNode.querySelector(".event");
+        eventEl.style.top = `${top}px`;
+        eventEl.style.height = `${height}px`;
 
-      const top = (Number(startHour) + Number(startMin) / 60) * 60;
-      const height =
-        Number(endHour) +
-        Number(endMin) / 60 -
-        (Number(startHour) + Number(startMin) / 60) * 60;
-      const eventEl = eventNode.querySelector(".event");
-      eventEl.style.top = `${top}px`;
-      eventEl.style.height = `${height}px`;
+        const slot = document.querySelector(`[data-hour="${startHour}"]`);
+        slot.appendChild(eventNode);
+      }
+    );
+  }
 
-      fragment.appendChild(eventNode);
+  transformData(events) {
+    return events.map((event) => {
+      let [startHour, startMin] = event.startTime.split(":");
+      let [endHour, endMin] = event.endTime.split(":");
+
+      startHour = Number(startHour);
+      startMin = Number(startMin);
+      endHour = Number(endHour);
+      endMin = Number(endMin);
+
+      return { ...event, startHour, startMin, endHour, endMin };
     });
-
-    this.root.appendChild(fragment);
   }
 }
 
