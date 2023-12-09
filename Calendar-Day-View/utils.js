@@ -3,3 +3,5 @@ export const getElement = (htmlString) => {
   template.innerHTML = htmlString.trim();
   return template.content.cloneNode(true);
 };
+
+export const getMeridian = (hour) => (hour > 11 ? "PM" : "AM");

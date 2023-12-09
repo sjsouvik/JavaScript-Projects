@@ -1,30 +1,29 @@
-import { getElement } from "./utils.js";
+import { getElement, getMeridian } from "./utils.js";
+import { events } from "./data.js";
 
-const events = [
-  { startTime: "1:30", endTime: "2:00" },
-  { startTime: "3:45", endTime: "4:45" },
-];
+const gapBw2slots = 51;
 
 class DayView {
   constructor(root) {
     this.root = root;
-    this.render();
+    this.renderSlots();
 
-    this.events = this.transformData(events);
-    this.renderEvents(events);
+    this.queue = [];
+    this.events = events;
+    this.transformData(events);
+    this.renderEvents();
   }
 
-  render() {
+  renderSlots() {
     const html = Array(24)
       .fill(null)
       .map(
         (_, index) =>
           `<div class="slot">
-              <div class="time">${index > 12 ? index % 12 : index}${
-            index > 12 ? "PM" : "AM"
-          }</div>
+              <div class="time">${index > 12 ? index % 12 : index}${getMeridian(
+            index
+          )}</div>
               <div class="slot-events" data-hour=${index}>
-                
               </div>  
             </div>`
       )
@@ -34,34 +33,74 @@ class DayView {
     this.root.appendChild(element);
   }
 
-  renderEvents() {
-    this.events.forEach(
-      ({ startTime, endTime, startHour, startMin, endHour, endMin }) => {
-        const eventHtml = `
-        <div class="event">
-            <p>
-              ${startTime} - ${endTime}
-            </p>
-        </div>`;
+  getOverlapsCount(eventDetails) {
+    let deleteCount = 0;
 
-        const eventNode = getElement(eventHtml);
+    // queue will contain only the events that are overlapping
+    for (let i = 0; i < this.queue.length; i++) {
+      const item = this.queue[i];
 
-        // const top = (startHour + startMin / 60) * 51;
-        const top = (startMin * 51) / 60;
-        const height =
-          (endHour + endMin / 60 - (startHour + startMin / 60)) * 51;
-        const eventEl = eventNode.querySelector(".event");
-        eventEl.style.top = `${top}px`;
-        eventEl.style.height = `${height}px`;
-
-        const slot = document.querySelector(`[data-hour="${startHour}"]`);
-        slot.appendChild(eventNode);
+      // condition to find out the number of events that are not overlapped and delete them
+      if (
+        eventDetails.startHour > item.endHour ||
+        (eventDetails.startHour === item.endHour &&
+          eventDetails.startMin >= item.endMin)
+      ) {
+        deleteCount++;
       }
-    );
+    }
+
+    this.queue.splice(0, deleteCount, eventDetails);
+    return this.queue.length;
   }
 
-  transformData(events) {
-    return events.map((event) => {
+  renderEvents() {
+    this.events.forEach((event) => {
+      const {
+        startTime,
+        endTime,
+        startHour,
+        startMin,
+        endHour,
+        endMin,
+        color,
+        title,
+      } = event;
+      const eventHtml = `
+        <div class="event">
+            <p class="mr-1">
+              ${startTime}${getMeridian(startHour)} - ${endTime}${getMeridian(
+        endHour
+      )}
+            </p>
+            <p class="mr-1">${title}</p>
+        </div>`;
+
+      const eventNode = getElement(eventHtml);
+
+      const overlaps = this.getOverlapsCount(event);
+      const top = (startMin * gapBw2slots) / 60;
+      const height =
+        (endHour + endMin / 60 - (startHour + startMin / 60)) * gapBw2slots;
+      const width = 100 / overlaps;
+      const eventEl = eventNode.querySelector(".event");
+
+      eventEl.style.top = `${top}px`;
+      eventEl.style.height = `${height}px`;
+      eventEl.style.width = `${width}%`;
+      eventEl.style.backgroundColor = color;
+
+      if (overlaps > 1) {
+        eventEl.classList.add("overlap-event");
+      }
+
+      const slot = document.querySelector(`[data-hour="${startHour}"]`);
+      slot.appendChild(eventNode);
+    });
+  }
+
+  transformData() {
+    this.events = this.events.map((event) => {
       let [startHour, startMin] = event.startTime.split(":");
       let [endHour, endMin] = event.endTime.split(":");
 
@@ -71,6 +110,18 @@ class DayView {
       endMin = Number(endMin);
 
       return { ...event, startHour, startMin, endHour, endMin };
+    });
+
+    this.events = this.events.sort((a, b) => {
+      if (a.startHour < b.startHour || a.endHour < b.endHour) {
+        return -1;
+      }
+
+      if (a.startHour === b.startHour) {
+        return a.startMin - b.startMin;
+      }
+
+      return 1;
     });
   }
 }

@@ -10,6 +10,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  padding: 0.5rem;
 }
 
 .slot {
@@ -24,6 +25,7 @@ body {
 
 .slot-events {
   position: relative;
+
   border-top: 1px solid lightgray;
   width: 100%;
 }
@@ -34,9 +36,16 @@ body {
   width: 100%;
   background-color: lightcoral;
   color: white;
-  border-radius: 0.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
   z-index: 1;
+}
+
+.overlap-event {
+  right: 0;
+  border: 1px solid white;
+}
+
+.mr-1 {
+  margin: 0.5rem;
 }
