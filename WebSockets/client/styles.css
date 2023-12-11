@@ -1,0 +1,39 @@
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#join-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.username-input {
+  padding: 0.25rem 0.5rem;
+}
+
+.participants {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.participant {
+  list-style-type: none;
+  border: 1px solid black;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.text-input {
+  padding: 0.5rem;
+}
