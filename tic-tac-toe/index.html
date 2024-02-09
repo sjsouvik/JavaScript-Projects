@@ -76,7 +76,7 @@
             const { row, col } = e.target.dataset;
             updateBoard(Number(row), Number(col), turn);
 
-            winner = findWinner();
+            winner = findWinner(row, col);
             if (winner) {
               statusMessage.textContent = `Winner is: ${winner}`;
               return;
@@ -101,16 +101,20 @@
       }
 
       // TODO: need to check the diagonals to find the winner
-      function findWinner() {
-        for (let i = 0; i < size; i++) {
-          if (allMoves[i] && checkMoves(allMoves[i])) {
-            return allMoves[i][0];
-          }
 
-          const verticalCells = allMoves.map((_, index) => allMoves[index][i]);
-          if (checkMoves(verticalCells)) {
-            return verticalCells[i][0];
-          }
+      /* optimize: check only in the corresponding row values, column values & diagonal values 
+      of the currently selected row & column to find the winner, currently checking all the row & column 
+      values to find the winner */
+      function findWinner(selectedRow, selectedCol) {
+        if (allMoves[selectedRow] && checkMoves(allMoves[selectedRow])) {
+          return allMoves[selectedRow][0];
+        }
+
+        const verticalCells = allMoves.map(
+          (_, index) => allMoves[index][selectedCol]
+        );
+        if (checkMoves(verticalCells)) {
+          return verticalCells[selectedCol][0];
         }
       }
 
