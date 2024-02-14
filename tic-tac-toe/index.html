@@ -102,9 +102,8 @@
 
       // TODO: need to check the diagonals to find the winner
 
-      /* optimize: check only in the corresponding row values, column values & diagonal values 
-      of the currently selected row & column to find the winner, currently checking all the row & column 
-      values to find the winner */
+      /* optimization: checking only the corresponding row values, column values 
+      of the currently selected cell to find the winner */
       function findWinner(selectedRow, selectedCol) {
         if (allMoves[selectedRow] && checkMoves(allMoves[selectedRow])) {
           return allMoves[selectedRow][0];
