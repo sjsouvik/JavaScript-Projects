@@ -1,0 +1,23 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+input {
+  display: block;
+}
+
+input:focus {
+  outline: 2px solid blue;
+  outline-offset: 1px;
+}
+
+.error {
+  color: red;
+  font-size: 0.85rem;
+}
+
+.hidden {
+  display: none;
+}
