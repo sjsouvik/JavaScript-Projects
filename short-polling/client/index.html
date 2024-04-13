@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Short polling demo</title>
+  </head>
+  <body>
+    <h1>Short polling demo</h1>
+
+    <div id="root"></div>
+
+    <script>
+      const getDataAndRender = async () => {
+        try {
+          const res = await fetch("http://localhost:3000/data");
+          const { data } = await res.json();
+
+          const rootEl = document.getElementById("root");
+          rootEl.textContent = data;
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      let timerId;
+      function shortPolling() {
+        timerId = setInterval(() => {
+          getDataAndRender();
+        }, 5 * 1000);
+      }
+
+      shortPolling();
+
+      // clear the interval on some event or action
+      // clearInterval(timerId)
+    </script>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "short-polling",
+  "version": "1.0.0",
+  "description": "demo of short polling",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Souvik Jana",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0"
+  }
+}
