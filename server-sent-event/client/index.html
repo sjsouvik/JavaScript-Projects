@@ -8,18 +8,17 @@
   <body>
     <h1>Server Sent Event(SSE) demo</h1>
 
-    <div id="root"></div>
+    <ul id="root"></ul>
 
     <script>
       const eventSource = new EventSource("/data");
-      eventSource.onmessage = (event) => {
-        console.log("l-", event.data);
 
+      eventSource.addEventListener("message", (event) => {
         const rootEl = document.getElementById("root");
         const listEl = document.createElement("li");
         listEl.textContent = event.data;
         rootEl.appendChild(listEl);
-      };
+      });
     </script>
   </body>
 </html>
