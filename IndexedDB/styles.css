@@ -1,0 +1,14 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+}
+
+.completed-task {
+  text-decoration: line-through;
+}
