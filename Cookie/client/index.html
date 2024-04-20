@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Demo of Cookie</title>
+  </head>
+  <body>
+    <h1>Welcome to the Recommendation App!</h1>
+
+    <section id="preferences-container">
+      <h2>Set Your Preferences</h2>
+      <form id="preferences-form">
+        <label for="preferences">Choose your preferences:</label>
+        <select id="preferences" name="preferences">
+          <option value="movies">Movies</option>
+          <option value="books">Books</option>
+          <option value="music">Music</option>
+        </select>
+        <button id="set-preference-btn">Set Preferences</button>
+      </form>
+    </section>
+
+    <section id="recommendations-container" style="display: none">
+      <h2>Personalized Recommendations</h2>
+      <p id="recommendations"></p>
+      <button id="logout-btn">Logout</button>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>

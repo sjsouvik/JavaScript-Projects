@@ -1,0 +1,18 @@
+{
+  "name": "cookie",
+  "version": "1.0.0",
+  "description": "demo of cookie",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0"
+  }
+}
