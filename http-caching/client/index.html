@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo of HTTP caching</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Demo of HTTP caching</h1>
+    <section id="content">
+      <p>
+        This demo showcases HTTP caching with different HTTP cache related
+        headers.
+      </p>
+
+      <img
+        src="image.gif"
+        alt="Happy man after getting his promotion"
+        id="cached-image"
+      />
+
+      <h2>Invalidate the cache</h2>
+      <p>
+        Click the button to invalidate the cache & fetch the image from the
+        server again.
+      </p>
+      <button id="invalidate-cache-btn">Fetch New Image</button>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
